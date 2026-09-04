@@ -1,0 +1,47 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ============================================================
+         AURORA — dark teal-navy with a luminous mint-green accent.
+         ============================================================ -->
+    <sys:String x:Key="Theme.Id">Aurora</sys:String>
+
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="Brush.Bg.Window" Color="#0B141B" />
+    <SolidColorBrush x:Key="Brush.Bg.Sidebar" Color="#081016" />
+    <SolidColorBrush x:Key="Brush.Bg.Surface" Color="#12202A" />
+    <SolidColorBrush x:Key="Brush.Bg.SurfaceAlt" Color="#1A2C38" />
+    <SolidColorBrush x:Key="Brush.Bg.Input" Color="#0E1922" />
+    <SolidColorBrush x:Key="Brush.Bg.Overlay" Color="#99010A0F" />
+
+    <!-- Borders -->
+    <SolidColorBrush x:Key="Brush.Border" Color="#223441" />
+    <SolidColorBrush x:Key="Brush.Border.Strong" Color="#32505F" />
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="#ECFBF5" />
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="#AECBC2" />
+    <SolidColorBrush x:Key="Brush.Text.Muted" Color="#6E8A83" />
+    <SolidColorBrush x:Key="Brush.Text.OnAccent" Color="#04231A" />
+
+    <!-- Accent -->
+    <Color x:Key="Color.Accent">#34E5B3</Color>
+    <SolidColorBrush x:Key="Brush.Accent" Color="#34E5B3" />
+    <SolidColorBrush x:Key="Brush.Accent.Hover" Color="#57F0C6" />
+    <SolidColorBrush x:Key="Brush.Accent.Muted" Color="#3334E5B3" />
+    <LinearGradientBrush x:Key="Brush.Accent.Gradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#34E5B3" />
+        <GradientStop Offset="1" Color="#7C8CFF" />
+    </LinearGradientBrush>
+
+    <!-- Status -->
+    <SolidColorBrush x:Key="Brush.Success" Color="#34E5B3" />
+    <SolidColorBrush x:Key="Brush.Warning" Color="#FFD166" />
+    <SolidColorBrush x:Key="Brush.Error" Color="#FF6B6B" />
+    <SolidColorBrush x:Key="Brush.Info" Color="#8AB4FF" />
+
+    <!-- Progress -->
+    <SolidColorBrush x:Key="Brush.Progress.Track" Color="#223441" />
+    <SolidColorBrush x:Key="Brush.Progress.Fill" Color="#34E5B3" />
+</ResourceDictionary>

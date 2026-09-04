@@ -1,0 +1,47 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ============================================================
+         CRIMSON — warm near-black with a bold crimson accent.
+         ============================================================ -->
+    <sys:String x:Key="Theme.Id">Crimson</sys:String>
+
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="Brush.Bg.Window" Color="#14100F" />
+    <SolidColorBrush x:Key="Brush.Bg.Sidebar" Color="#0E0B0A" />
+    <SolidColorBrush x:Key="Brush.Bg.Surface" Color="#1D1817" />
+    <SolidColorBrush x:Key="Brush.Bg.SurfaceAlt" Color="#271F1E" />
+    <SolidColorBrush x:Key="Brush.Bg.Input" Color="#171211" />
+    <SolidColorBrush x:Key="Brush.Bg.Overlay" Color="#99000000" />
+
+    <!-- Borders -->
+    <SolidColorBrush x:Key="Brush.Border" Color="#332A28" />
+    <SolidColorBrush x:Key="Brush.Border.Strong" Color="#4A3B39" />
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="#FAF3F2" />
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="#D3BEBB" />
+    <SolidColorBrush x:Key="Brush.Text.Muted" Color="#99817E" />
+    <SolidColorBrush x:Key="Brush.Text.OnAccent" Color="#FFFFFF" />
+
+    <!-- Accent -->
+    <Color x:Key="Color.Accent">#E5484D</Color>
+    <SolidColorBrush x:Key="Brush.Accent" Color="#E5484D" />
+    <SolidColorBrush x:Key="Brush.Accent.Hover" Color="#F26169" />
+    <SolidColorBrush x:Key="Brush.Accent.Muted" Color="#33E5484D" />
+    <LinearGradientBrush x:Key="Brush.Accent.Gradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#E5484D" />
+        <GradientStop Offset="1" Color="#FF7A3D" />
+    </LinearGradientBrush>
+
+    <!-- Status -->
+    <SolidColorBrush x:Key="Brush.Success" Color="#4CC38A" />
+    <SolidColorBrush x:Key="Brush.Warning" Color="#F5B84B" />
+    <SolidColorBrush x:Key="Brush.Error" Color="#FF5C6C" />
+    <SolidColorBrush x:Key="Brush.Info" Color="#6AA9FF" />
+
+    <!-- Progress -->
+    <SolidColorBrush x:Key="Brush.Progress.Track" Color="#332A28" />
+    <SolidColorBrush x:Key="Brush.Progress.Fill" Color="#E5484D" />
+</ResourceDictionary>

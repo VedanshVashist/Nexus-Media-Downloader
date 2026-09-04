@@ -1,0 +1,59 @@
+<UserControl x:Class="Nexus.App.Views.QueueView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Nexus.App.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:QueueViewModel}"
+             d:DesignHeight="800" d:DesignWidth="900">
+
+    <Grid Margin="32,28,32,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header + actions -->
+        <Grid Grid.Row="0" Margin="0,0,0,18">
+            <StackPanel>
+                <TextBlock Text="Queue" Style="{StaticResource Text.Title}" />
+                <TextBlock Style="{StaticResource Text.Subtitle}" Margin="0,4,0,0">
+                    <Run Text="{Binding Count, Mode=OneWay}" />
+                    <Run Text="items staged" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Command="{Binding ClearCommand}" Content="Clear" Margin="0,0,10,0" />
+                <Button Style="{StaticResource Button.Primary}" Command="{Binding StartAllCommand}" MinWidth="130">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource Glyph}" Text="&#xE768;" FontSize="14" Margin="0,0,8,0" />
+                        <TextBlock Text="Start all" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Empty state -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="40" Margin="0,0,0,28"
+                VerticalAlignment="Top"
+                Visibility="{Binding IsEmpty, Converter={StaticResource Conv.BoolToVis}}">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource Glyph}" Text="&#xE8FD;" FontSize="46"
+                           Foreground="{DynamicResource Brush.Text.Muted}" />
+                <TextBlock Text="The queue is empty" Style="{StaticResource Text.Heading}"
+                           HorizontalAlignment="Center" Margin="0,14,0,0" />
+                <TextBlock Text="Add items from Home to line them up, then start them together."
+                           Style="{StaticResource Text.Caption}" HorizontalAlignment="Center" Margin="0,4,0,0" />
+            </StackPanel>
+        </Border>
+
+        <!-- List -->
+        <ListBox Grid.Row="1" Padding="0,0,0,28"
+                 ItemsSource="{Binding Items}"
+                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                 ItemTemplate="{StaticResource Template.QueueRow}"
+                 ItemContainerStyle="{StaticResource Item.Plain}"
+                 Visibility="{Binding IsEmpty, Converter={StaticResource Conv.InverseBoolToVis}}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- WPF is Windows-only. This project builds/runs on Windows; the class
+         libraries it depends on remain cross-platform net10.0. -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Nexus.App</RootNamespace>
+    <AssemblyName>Nexus</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ApplicationIcon>Assets\nexus.ico</ApplicationIcon>
+    <!-- Self-contained portable publishing knobs (used by scripts/publish). -->
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>false</PublishSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nexus.Core\Nexus.Core.csproj" />
+    <ProjectReference Include="..\Nexus.Infrastructure\Nexus.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.Debug" />
+  </ItemGroup>
+
+  <!-- Bundled external tools (yt-dlp.exe, ffmpeg.exe, ffprobe.exe) are fetched by
+       scripts/fetch-tools.ps1 into this folder and are intentionally not committed.
+       When present, copy them into a "tools" subfolder next to Nexus.exe so
+       DependencyManager can resolve them without any system-wide install. An empty or
+       missing folder simply contributes no items. -->
+  <ItemGroup>
+    <None Remove="tools\**\*" />
+    <Content Include="tools\**\*"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             Visible="false" />
+  </ItemGroup>
+
+</Project>

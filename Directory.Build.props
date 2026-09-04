@@ -1,0 +1,23 @@
+<Project>
+
+  <!-- Solution-wide build settings shared by every project. -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1591: missing XML comment for publicly visible type/member. We document
+         where it adds value rather than everywhere, so silence the blanket warning. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <Deterministic>true</Deterministic>
+    <Product>Nexus</Product>
+    <Company>Nexus</Company>
+    <Authors>Nexus</Authors>
+    <Version>0.1.0</Version>
+    <Copyright>Copyright © Nexus contributors</Copyright>
+  </PropertyGroup>
+
+</Project>

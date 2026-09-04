@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Nexus.Core</RootNamespace>
+    <AssemblyName>Nexus.Core</AssemblyName>
+  </PropertyGroup>
+
+  <!-- Core is pure domain: no WPF, no infrastructure, minimal dependencies.
+       CommunityToolkit.Mvvm is referenced only for ObservableObject on
+       UI-bound domain state (e.g. DownloadTask live progress). -->
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+
+</Project>

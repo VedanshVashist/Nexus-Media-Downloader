@@ -1,0 +1,19 @@
+<Application x:Class="Nexus.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Converters first so control styles/views can resolve them. -->
+                <ResourceDictionary Source="pack://application:,,,/Resources/Converters.xaml" />
+                <!-- Default theme; swapped at runtime by ThemeService (keyed by "Theme.Id"). -->
+                <ResourceDictionary Source="pack://application:,,,/Themes/Midnight.xaml" />
+                <!-- Control styles reference theme brushes via DynamicResource. -->
+                <ResourceDictionary Source="pack://application:,,,/Styles/Shared.xaml" />
+                <!-- Implicit VM -> View data templates for the page host. -->
+                <ResourceDictionary Source="pack://application:,,,/Resources/Templates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
