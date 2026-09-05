@@ -105,6 +105,29 @@ public sealed class DurationConverter : IValueConverter
         => Binding.DoNothing;
 }
 
+/// <summary>
+/// Formats a <see cref="TimeSpan"/> position as a timestamp ([h:]mm:ss). Unlike
+/// <see cref="DurationConverter"/>, a zero position renders as "0:00" rather than
+/// blank — a chapter can legitimately start at the very beginning of a video.
+/// </summary>
+public sealed class TimestampConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is not TimeSpan span || span < TimeSpan.Zero)
+        {
+            return string.Empty;
+        }
+
+        return span.TotalHours >= 1
+            ? span.ToString(@"h\:mm\:ss", CultureInfo.InvariantCulture)
+            : span.ToString(@"m\:ss", CultureInfo.InvariantCulture);
+    }
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        => Binding.DoNothing;
+}
+
 /// <summary>Converts a <see cref="DateTimeOffset"/> (UTC) to a friendly local date/time.</summary>
 public sealed class LocalDateTimeConverter : IValueConverter
 {

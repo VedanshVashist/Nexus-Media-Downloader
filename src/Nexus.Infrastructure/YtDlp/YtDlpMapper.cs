@@ -40,7 +40,23 @@ internal static class YtDlpMapper
             Subtitles = MapSubtitles(root.Subtitles, root.AutomaticCaptions),
             Language = root.Language,
             Availability = root.Availability,
-            IsLive = root.IsLive ?? false
+            IsLive = root.IsLive ?? false,
+            CommentCount = root.CommentCount,
+            SubscriberCount = root.ChannelFollowerCount,
+            AgeLimit = root.AgeLimit,
+            LiveStatus = root.LiveStatus,
+            WasLive = root.WasLive ?? false,
+            UploaderId = root.UploaderId,
+            UploaderUrl = root.UploaderUrl,
+            License = root.License,
+            PublishedAt = FromUnixSeconds(root.Timestamp ?? root.ReleaseTimestamp),
+            PlayableInEmbed = root.PlayableInEmbed,
+            Width = root.Width,
+            Height = root.Height,
+            Resolution = root.Resolution,
+            Track = root.Track,
+            Artist = root.Artist,
+            Album = root.Album
         };
     }
 
@@ -96,6 +112,9 @@ internal static class YtDlpMapper
 
         return null;
     }
+
+    internal static DateTimeOffset? FromUnixSeconds(long? epochSeconds) =>
+        epochSeconds is > 0 ? DateTimeOffset.FromUnixTimeSeconds(epochSeconds.Value) : null;
 
     internal static string? SelectBestThumbnail(YtDlpRoot root)
     {

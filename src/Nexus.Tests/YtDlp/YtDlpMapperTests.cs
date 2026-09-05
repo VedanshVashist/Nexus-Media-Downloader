@@ -60,6 +60,34 @@ public sealed class YtDlpMapperTests
     }
     """;
 
+    private const string ExtendedVideoJson = """
+    {
+      "_type": "video",
+      "id": "abc123",
+      "title": "Extended Video",
+      "uploader": "Music Channel",
+      "uploader_id": "@musicchannel",
+      "uploader_url": "https://youtube.com/@musicchannel",
+      "channel_follower_count": 2500000,
+      "comment_count": 12000,
+      "view_count": 9000000,
+      "like_count": 300000,
+      "age_limit": 18,
+      "live_status": "was_live",
+      "was_live": true,
+      "license": "Standard YouTube License",
+      "timestamp": 1700000000,
+      "release_timestamp": 1699000000,
+      "playable_in_embed": false,
+      "width": 1920,
+      "height": 1080,
+      "resolution": "1920x1080",
+      "track": "Never Gonna Give You Up",
+      "artist": "Rick Astley",
+      "album": "Whenever You Need Somebody"
+    }
+    """;
+
     [Fact]
     public void ToVideoInfo_MapsCoreFields()
     {
@@ -125,5 +153,45 @@ public sealed class YtDlpMapperTests
         YtDlpMapper.ParseUploadDate("notadate").Should().BeNull();
         YtDlpMapper.ParseUploadDate(null).Should().BeNull();
         YtDlpMapper.ParseUploadDate("20240501").Should().Be(new DateOnly(2024, 5, 1));
+    }
+
+    [Fact]
+    public void ToVideoInfo_MapsExtendedMetadata()
+    {
+        var root = JsonSerializer.Deserialize<YtDlpRoot>(ExtendedVideoJson, Options)!;
+
+        YtDlpMapper.IsPlaylist(root).Should().BeFalse();
+        var info = YtDlpMapper.ToVideoInfo(root);
+
+        info.SubscriberCount.Should().Be(2500000);
+        info.CommentCount.Should().Be(12000);
+        info.AgeLimit.Should().Be(18);
+        info.HasAgeRestriction.Should().BeTrue();
+        info.LiveStatus.Should().Be("was_live");
+        info.WasLive.Should().BeTrue();
+        info.UploaderId.Should().Be("@musicchannel");
+        info.UploaderUrl.Should().Be("https://youtube.com/@musicchannel");
+        info.License.Should().Be("Standard YouTube License");
+        info.PlayableInEmbed.Should().BeFalse();
+        info.Width.Should().Be(1920);
+        info.Height.Should().Be(1080);
+        info.Resolution.Should().Be("1920x1080");
+        info.Track.Should().Be("Never Gonna Give You Up");
+        info.Artist.Should().Be("Rick Astley");
+        info.Album.Should().Be("Whenever You Need Somebody");
+        info.IsMusic.Should().BeTrue();
+
+        // timestamp is preferred over release_timestamp.
+        info.PublishedAt.Should().NotBeNull();
+        info.PublishedAt!.Value.ToUnixTimeSeconds().Should().Be(1700000000);
+    }
+
+    [Fact]
+    public void FromUnixSeconds_HandlesNullAndZero()
+    {
+        YtDlpMapper.FromUnixSeconds(null).Should().BeNull();
+        YtDlpMapper.FromUnixSeconds(0).Should().BeNull();
+        YtDlpMapper.FromUnixSeconds(1700000000).Should().NotBeNull();
+        YtDlpMapper.FromUnixSeconds(1700000000)!.Value.ToUnixTimeSeconds().Should().Be(1700000000);
     }
 }

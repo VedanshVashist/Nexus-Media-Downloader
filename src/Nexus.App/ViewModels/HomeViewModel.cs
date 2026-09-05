@@ -56,6 +56,7 @@ public sealed partial class HomeViewModel : PageViewModel
     private readonly ISettingsService _settings;
     private readonly IDialogService _dialogs;
     private readonly INotificationService _notifications;
+    private readonly ISystemAccess _system;
     private readonly ILogger<HomeViewModel> _logger;
 
     /// <summary>The live options template that new tasks are cloned from.</summary>
@@ -71,6 +72,7 @@ public sealed partial class HomeViewModel : PageViewModel
         ISettingsService settings,
         IDialogService dialogs,
         INotificationService notifications,
+        ISystemAccess system,
         ILogger<HomeViewModel> logger)
         : base("home", "Home", NavGlyph.Home)
     {
@@ -81,6 +83,7 @@ public sealed partial class HomeViewModel : PageViewModel
         _settings = settings;
         _dialogs = dialogs;
         _notifications = notifications;
+        _system = system;
         _logger = logger;
 
         var downloads = settings.Current.Downloads;
@@ -181,11 +184,17 @@ public sealed partial class HomeViewModel : PageViewModel
     [ObservableProperty]
     private bool _writeInfoJson;
 
+    [ObservableProperty]
+    private bool _descriptionExpanded;
+
     public bool HasVideo => Video is not null;
     public bool HasPlaylist => Playlist is not null;
     public bool HasResult => Video is not null || Playlist is not null;
     public bool IsAudio => SelectedDownloadType == DownloadType.Audio;
     public bool IsQualityAuto => SelectedFormat is null;
+
+    // Collapse the description whenever a new video is shown (or the result is cleared).
+    partial void OnVideoChanged(VideoInfo? value) => DescriptionExpanded = false;
 
     // --- Option synchronization into the live template ---
 
@@ -342,6 +351,49 @@ public sealed partial class HomeViewModel : PageViewModel
 
     [RelayCommand]
     private void UseQualityPreset() => SelectedFormat = null;
+
+    [RelayCommand]
+    private void ToggleDescription() => DescriptionExpanded = !DescriptionExpanded;
+
+    [RelayCommand]
+    private void CopyTags()
+    {
+        if (Video is null || Video.Tags.Count == 0)
+        {
+            return;
+        }
+
+        try
+        {
+            Clipboard.SetText(string.Join(", ", Video.Tags));
+            _notifications.Info("Tags copied.", "Nexus");
+        }
+        catch (Exception)
+        {
+            // Clipboard may be locked by another process; ignore.
+        }
+    }
+
+    [RelayCommand]
+    private void CopyText(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        try
+        {
+            Clipboard.SetText(text);
+        }
+        catch (Exception)
+        {
+            // Clipboard may be locked by another process; ignore.
+        }
+    }
+
+    [RelayCommand]
+    private void OpenUrl(string? url) => _system.OpenUrl(url);
 
     private bool CanCompose() => HasResult;
 

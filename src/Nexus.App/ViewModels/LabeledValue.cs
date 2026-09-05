@@ -6,4 +6,12 @@ namespace Nexus.App.ViewModels;
 /// <c>DisplayMemberPath</c> to <see cref="Label"/> and <c>SelectedValuePath</c> to
 /// <see cref="Value"/>.
 /// </summary>
-public sealed record LabeledValue<T>(T Value, string Label);
+public sealed record LabeledValue<T>(T Value, string Label)
+{
+    // A re-templated ComboBox renders its collapsed selection through
+    // SelectionBoxItem/SelectionBoxItemTemplate. With DisplayMemberPath (and no
+    // explicit ItemTemplate) WPF leaves SelectionBoxItemTemplate null, so the
+    // selection box falls back to ToString(). Return the label so the collapsed
+    // box shows "1080p" rather than the record's synthesized member dump.
+    public override string ToString() => Label;
+}

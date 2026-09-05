@@ -85,6 +85,57 @@ internal sealed class YtDlpRoot
     [JsonPropertyName("is_live")]
     public bool? IsLive { get; set; }
 
+    [JsonPropertyName("comment_count")]
+    public long? CommentCount { get; set; }
+
+    [JsonPropertyName("channel_follower_count")]
+    public long? ChannelFollowerCount { get; set; }
+
+    [JsonPropertyName("age_limit")]
+    public int? AgeLimit { get; set; }
+
+    [JsonPropertyName("live_status")]
+    public string? LiveStatus { get; set; }
+
+    [JsonPropertyName("was_live")]
+    public bool? WasLive { get; set; }
+
+    [JsonPropertyName("uploader_id")]
+    public string? UploaderId { get; set; }
+
+    [JsonPropertyName("uploader_url")]
+    public string? UploaderUrl { get; set; }
+
+    [JsonPropertyName("license")]
+    public string? License { get; set; }
+
+    [JsonPropertyName("timestamp")]
+    public long? Timestamp { get; set; }
+
+    [JsonPropertyName("release_timestamp")]
+    public long? ReleaseTimestamp { get; set; }
+
+    [JsonPropertyName("playable_in_embed")]
+    public bool? PlayableInEmbed { get; set; }
+
+    [JsonPropertyName("width")]
+    public int? Width { get; set; }
+
+    [JsonPropertyName("height")]
+    public int? Height { get; set; }
+
+    [JsonPropertyName("resolution")]
+    public string? Resolution { get; set; }
+
+    [JsonPropertyName("track")]
+    public string? Track { get; set; }
+
+    [JsonPropertyName("artist")]
+    public string? Artist { get; set; }
+
+    [JsonPropertyName("album")]
+    public string? Album { get; set; }
+
     // Playlist-specific
     [JsonPropertyName("entries")]
     public List<YtDlpRoot>? Entries { get; set; }

@@ -23,6 +23,7 @@
     <conv:SpeedToHumanConverter x:Key="Conv.Speed" />
     <conv:EtaToHumanConverter x:Key="Conv.Eta" />
     <conv:DurationConverter x:Key="Conv.Duration" />
+    <conv:TimestampConverter x:Key="Conv.Timestamp" />
     <conv:LocalDateTimeConverter x:Key="Conv.LocalDateTime" />
     <conv:CompactNumberConverter x:Key="Conv.CompactNumber" />
 

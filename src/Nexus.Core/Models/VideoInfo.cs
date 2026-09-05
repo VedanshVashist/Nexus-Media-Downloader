@@ -44,6 +44,48 @@ public sealed record VideoInfo
     /// <summary>True when the source is currently a live stream.</summary>
     public bool IsLive { get; init; }
 
+    public long? CommentCount { get; init; }
+
+    /// <summary>Channel subscriber count, from yt-dlp's channel_follower_count.</summary>
+    public long? SubscriberCount { get; init; }
+
+    /// <summary>Minimum age required to view, when age-restricted (0 or null otherwise).</summary>
+    public int? AgeLimit { get; init; }
+
+    /// <summary>Live status note, e.g. "is_live", "was_live", "not_live", "post_live".</summary>
+    public string? LiveStatus { get; init; }
+
+    /// <summary>True when the source was previously broadcast live.</summary>
+    public bool WasLive { get; init; }
+
+    public string? UploaderId { get; init; }
+    public string? UploaderUrl { get; init; }
+
+    /// <summary>Content license, when yt-dlp reports it.</summary>
+    public string? License { get; init; }
+
+    /// <summary>Publish/broadcast time (UTC), from timestamp or release_timestamp.</summary>
+    public DateTimeOffset? PublishedAt { get; init; }
+
+    /// <summary>Whether the source permits embedded playback.</summary>
+    public bool? PlayableInEmbed { get; init; }
+
+    public int? Width { get; init; }
+    public int? Height { get; init; }
+
+    /// <summary>Human-readable resolution reported at the top level, e.g. "1920x1080".</summary>
+    public string? Resolution { get; init; }
+
+    /// <summary>Music metadata, present for tracks/music videos.</summary>
+    public string? Track { get; init; }
+    public string? Artist { get; init; }
+    public string? Album { get; init; }
+
     public bool HasChapters => Chapters.Count > 0;
     public bool HasSubtitles => Subtitles.Count > 0;
+    public bool HasTags => Tags.Count > 0;
+    public bool HasCategories => Categories.Count > 0;
+    public bool HasDuration => Duration > TimeSpan.Zero;
+    public bool HasAgeRestriction => AgeLimit is > 0;
+    public bool IsMusic => !string.IsNullOrWhiteSpace(Track) || !string.IsNullOrWhiteSpace(Artist);
 }

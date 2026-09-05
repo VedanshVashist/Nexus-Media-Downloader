@@ -120,11 +120,18 @@
                             <StackPanel Grid.Column="1" Margin="18,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Video.Title}" Style="{StaticResource Text.Heading}"
                                            TextTrimming="CharacterEllipsis" MaxHeight="56" TextWrapping="Wrap" />
-                                <TextBlock Text="{Binding Video.Uploader}" Style="{StaticResource Text.Subtitle}"
-                                           Margin="0,4,0,0"
-                                           Visibility="{Binding Video.Uploader, Converter={StaticResource Conv.StringToVis}}" />
-                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,0">
+                                <!-- Channel — opens the uploader/channel page -->
+                                <Button Style="{StaticResource Button.Link}" HorizontalAlignment="Left"
+                                        Padding="0" Margin="0,4,0,0"
+                                        Content="{Binding Video.Uploader}"
+                                        Command="{Binding OpenUrlCommand}"
+                                        CommandParameter="{Binding Video.UploaderUrl}"
+                                        Visibility="{Binding Video.Uploader, Converter={StaticResource Conv.StringToVis}}" />
+
+                                <!-- Stat chips (each hidden when its data is absent) -->
+                                <WrapPanel Margin="0,10,0,0">
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.HasDuration, Converter={StaticResource Conv.BoolToVis}}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Style="{StaticResource Glyph}" Text="&#xE916;" FontSize="12"
                                                        Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,0,6,0" />
@@ -132,7 +139,7 @@
                                                        Style="{StaticResource Text.Caption}" />
                                         </StackPanel>
                                     </Border>
-                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,0"
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
                                             Visibility="{Binding Video.ViewCount, Converter={StaticResource Conv.NullToVis}}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Style="{StaticResource Glyph}" Text="&#xE7B3;" FontSize="12"
@@ -143,10 +150,264 @@
                                             </TextBlock>
                                         </StackPanel>
                                     </Border>
-                                </StackPanel>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.LikeCount, Converter={StaticResource Conv.CountToVis}}">
+                                        <TextBlock Style="{StaticResource Text.Caption}">
+                                            <Run Text="{Binding Video.LikeCount, Converter={StaticResource Conv.CompactNumber}, Mode=OneWay}" />
+                                            <Run Text=" likes" />
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.CommentCount, Converter={StaticResource Conv.CountToVis}}">
+                                        <TextBlock Style="{StaticResource Text.Caption}">
+                                            <Run Text="{Binding Video.CommentCount, Converter={StaticResource Conv.CompactNumber}, Mode=OneWay}" />
+                                            <Run Text=" comments" />
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.SubscriberCount, Converter={StaticResource Conv.CountToVis}}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource Glyph}" Text="&#xE716;" FontSize="12"
+                                                       Foreground="{DynamicResource Brush.Text.Secondary}" Margin="0,0,6,0" />
+                                            <TextBlock Style="{StaticResource Text.Caption}">
+                                                <Run Text="{Binding Video.SubscriberCount, Converter={StaticResource Conv.CompactNumber}, Mode=OneWay}" />
+                                                <Run Text=" subscribers" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.PublishedAt, Converter={StaticResource Conv.NullToVis}}">
+                                        <TextBlock Style="{StaticResource Text.Caption}">
+                                            <Run Text="Published " />
+                                            <Run Text="{Binding Video.PublishedAt, Converter={StaticResource Conv.LocalDateTime}, Mode=OneWay}" />
+                                        </TextBlock>
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.Resolution, Converter={StaticResource Conv.StringToVis}}">
+                                        <TextBlock Text="{Binding Video.Resolution}" Style="{StaticResource Text.Caption}" />
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.LiveStatus, Converter={StaticResource Conv.StringToVis}}">
+                                        <TextBlock Text="{Binding Video.LiveStatus}" Style="{StaticResource Text.Caption}" />
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.HasAgeRestriction, Converter={StaticResource Conv.BoolToVis}}">
+                                        <TextBlock Text="{Binding Video.AgeLimit, StringFormat={}{0}+}" Style="{StaticResource Text.Caption}" />
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.License, Converter={StaticResource Conv.StringToVis}}">
+                                        <TextBlock Text="{Binding Video.License}" Style="{StaticResource Text.Caption}" />
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.Availability, Converter={StaticResource Conv.StringToVis}}">
+                                        <TextBlock Text="{Binding Video.Availability}" Style="{StaticResource Text.Caption}" />
+                                    </Border>
+                                    <Border Style="{StaticResource Chip}" Margin="0,0,8,8"
+                                            Visibility="{Binding Video.Language, Converter={StaticResource Conv.StringToVis}}">
+                                        <TextBlock Style="{StaticResource Text.Caption}">
+                                            <Run Text="Language " />
+                                            <Run Text="{Binding Video.Language, Mode=OneWay}" />
+                                        </TextBlock>
+                                    </Border>
+                                </WrapPanel>
                             </StackPanel>
                         </Grid>
                     </Border>
+
+                    <!-- Video detail cards (single video only) -->
+                    <StackPanel Visibility="{Binding HasVideo, Converter={StaticResource Conv.BoolToVis}}">
+
+                        <!-- Description -->
+                        <Border Style="{StaticResource Card}" Margin="0,16,0,0"
+                                Visibility="{Binding Video.Description, Converter={StaticResource Conv.StringToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="Description" Style="{StaticResource Text.Heading}" Margin="0,0,0,10" />
+                                <TextBlock Text="{Binding Video.Description}" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource Brush.Text.Secondary}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                            <Setter Property="MaxHeight" Value="110" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DescriptionExpanded}" Value="True">
+                                                    <Setter Property="MaxHeight" Value="4000" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <Button Style="{StaticResource Button.Link}" HorizontalAlignment="Left"
+                                        Padding="0" Margin="0,8,0,0"
+                                        Command="{Binding ToggleDescriptionCommand}">
+                                    <Grid>
+                                        <TextBlock Text="Show more"
+                                                   Visibility="{Binding DescriptionExpanded, Converter={StaticResource Conv.InverseBoolToVis}}" />
+                                        <TextBlock Text="Show less"
+                                                   Visibility="{Binding DescriptionExpanded, Converter={StaticResource Conv.BoolToVis}}" />
+                                    </Grid>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Tags & categories -->
+                        <Border Style="{StaticResource Card}" Margin="0,16,0,0"
+                                Visibility="{Binding Video.HasTags, Converter={StaticResource Conv.BoolToVis}}">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock Text="Tags" Style="{StaticResource Text.Heading}" HorizontalAlignment="Left" />
+                                    <Button Style="{StaticResource Button.Link}" HorizontalAlignment="Right"
+                                            Content="Copy all" Command="{Binding CopyTagsCommand}" />
+                                </Grid>
+                                <ItemsControl ItemsSource="{Binding Video.Tags}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource Chip}" Margin="0,0,8,8">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding}" Style="{StaticResource Text.Caption}"
+                                                               VerticalAlignment="Center" />
+                                                    <Button Style="{StaticResource Button.Icon}" Width="20" Height="20"
+                                                            FontSize="11" Margin="6,0,-4,0"
+                                                            Content="&#xE8C8;" ToolTip="Copy tag"
+                                                            Command="{Binding DataContext.CopyTextCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                            CommandParameter="{Binding}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock Text="Categories" Style="{StaticResource Text.Caption}" Margin="0,12,0,6"
+                                           Visibility="{Binding Video.HasCategories, Converter={StaticResource Conv.BoolToVis}}" />
+                                <ItemsControl ItemsSource="{Binding Video.Categories}"
+                                              Visibility="{Binding Video.HasCategories, Converter={StaticResource Conv.BoolToVis}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource Chip}" Margin="0,0,8,8">
+                                                <TextBlock Text="{Binding}" Style="{StaticResource Text.Caption}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Chapters -->
+                        <Border Style="{StaticResource Card}" Margin="0,16,0,0"
+                                Visibility="{Binding Video.HasChapters, Converter={StaticResource Conv.BoolToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="Chapters" Style="{StaticResource Text.Heading}" Margin="0,0,0,10" />
+                                <ItemsControl ItemsSource="{Binding Video.Chapters}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" Style="{StaticResource Chip}"
+                                                        VerticalAlignment="Center" Margin="0,0,10,0">
+                                                    <TextBlock Text="{Binding StartTime, Converter={StaticResource Conv.Timestamp}}"
+                                                               Style="{StaticResource Text.Caption}" />
+                                                </Border>
+                                                <TextBlock Grid.Column="1" Text="{Binding Title}" TextWrapping="Wrap"
+                                                           VerticalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Subtitles / captions -->
+                        <Border Style="{StaticResource Card}" Margin="0,16,0,0"
+                                Visibility="{Binding Video.HasSubtitles, Converter={StaticResource Conv.BoolToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="Subtitles &amp; captions" Style="{StaticResource Text.Heading}" Margin="0,0,0,10" />
+                                <ItemsControl ItemsSource="{Binding Video.Subtitles}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource Chip}" Margin="0,0,8,8">
+                                                <TextBlock Style="{StaticResource Text.Caption}">
+                                                    <Run Text="{Binding Language, Mode=OneWay}" />
+                                                    <Run>
+                                                        <Run.Style>
+                                                            <Style TargetType="Run">
+                                                                <Setter Property="Text" Value="" />
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsAutomatic}" Value="True">
+                                                                        <Setter Property="Text" Value=" · auto" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Run.Style>
+                                                    </Run>
+                                                </TextBlock>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Links & IDs -->
+                        <Border Style="{StaticResource Card}" Margin="0,16,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Links &amp; IDs" Style="{StaticResource Text.Heading}" Margin="0,0,0,10" />
+
+                                <!-- Video ID -->
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Video ID" Style="{StaticResource Text.Caption}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Video.Id}" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis" />
+                                    <Button Grid.Column="2" Style="{StaticResource Button.Icon}" Width="30" Height="30"
+                                            FontSize="13" Content="&#xE8C8;" ToolTip="Copy video ID"
+                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.Id}" />
+                                </Grid>
+
+                                <!-- Watch URL -->
+                                <Grid Margin="0,2"
+                                      Visibility="{Binding Video.WebpageUrl, Converter={StaticResource Conv.StringToVis}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Watch URL" Style="{StaticResource Text.Caption}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Video.WebpageUrl}" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis" />
+                                    <Button Grid.Column="2" Style="{StaticResource Button.Icon}" Width="30" Height="30"
+                                            FontSize="13" Content="&#xE8C8;" ToolTip="Copy URL"
+                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.WebpageUrl}" />
+                                    <Button Grid.Column="3" Style="{StaticResource Button.Icon}" Width="30" Height="30"
+                                            FontSize="13" Content="&#xE774;" ToolTip="Open in browser"
+                                            Command="{Binding OpenUrlCommand}" CommandParameter="{Binding Video.WebpageUrl}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
 
                     <!-- Playlist preview -->
                     <Border Style="{StaticResource Card}"

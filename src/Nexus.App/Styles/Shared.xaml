@@ -5,7 +5,10 @@
     <!-- ================= Design tokens (theme-independent) ================= -->
     <FontFamily x:Key="Font.Ui">Segoe UI Variable Text, Segoe UI</FontFamily>
     <FontFamily x:Key="Font.Display">Segoe UI Variable Display, Segoe UI Semibold, Segoe UI</FontFamily>
-    <FontFamily x:Key="Font.Icons">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+    <!-- MDL2 Assets is listed first because it ships on Windows 10 and 11, whereas
+         Segoe Fluent Icons is Windows 11-only; keeping the always-present font primary
+         avoids missing-glyph "tofu" boxes on Windows 10. All glyphs used are MDL2 codepoints. -->
+    <FontFamily x:Key="Font.Icons">Segoe MDL2 Assets, Segoe Fluent Icons</FontFamily>
 
     <sys:Double x:Key="Font.Caption">11.5</sys:Double>
     <sys:Double x:Key="Font.Small">12.5</sys:Double>
