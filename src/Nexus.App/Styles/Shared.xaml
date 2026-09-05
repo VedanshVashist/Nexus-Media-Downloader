@@ -230,6 +230,7 @@
                             SnapsToDevicePixels="True">
                         <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
+                                          TextBlock.FontFamily="{StaticResource Font.Icons}"
                                           TextBlock.Foreground="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>

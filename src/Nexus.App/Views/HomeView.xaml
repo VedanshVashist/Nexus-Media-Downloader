@@ -39,8 +39,9 @@
                         <Button Grid.Column="1" Style="{StaticResource Button.Icon}"
                                 Margin="8,0,0,0" Width="42" Height="42"
                                 Command="{Binding PasteCommand}"
-                                ToolTip="Paste from clipboard"
-                                Content="&#xE77F;" />
+                                ToolTip="Paste from clipboard">
+                            <TextBlock Style="{StaticResource Glyph}" Text="&#xE77F;" FontSize="16" />
+                        </Button>
 
                         <Button Grid.Column="2" Margin="8,0,0,0" MinWidth="88"
                                 Command="{Binding ClearCommand}"
@@ -270,10 +271,11 @@
                                                     <TextBlock Text="{Binding}" Style="{StaticResource Text.Caption}"
                                                                VerticalAlignment="Center" />
                                                     <Button Style="{StaticResource Button.Icon}" Width="20" Height="20"
-                                                            FontSize="11" Margin="6,0,-4,0"
-                                                            Content="&#xE8C8;" ToolTip="Copy tag"
+                                                            Margin="6,0,-4,0" ToolTip="Copy tag"
                                                             Command="{Binding DataContext.CopyTextCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                            CommandParameter="{Binding}" />
+                                                            CommandParameter="{Binding}">
+                                                        <TextBlock Style="{StaticResource Glyph}" Text="&#xE8C8;" FontSize="11" />
+                                                    </Button>
                                                 </StackPanel>
                                             </Border>
                                         </DataTemplate>
@@ -380,8 +382,10 @@
                                     <TextBlock Grid.Column="1" Text="{Binding Video.Id}" VerticalAlignment="Center"
                                                TextTrimming="CharacterEllipsis" />
                                     <Button Grid.Column="2" Style="{StaticResource Button.Icon}" Width="30" Height="30"
-                                            FontSize="13" Content="&#xE8C8;" ToolTip="Copy video ID"
-                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.Id}" />
+                                            ToolTip="Copy video ID"
+                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.Id}">
+                                        <TextBlock Style="{StaticResource Glyph}" Text="&#xE8C8;" FontSize="13" />
+                                    </Button>
                                 </Grid>
 
                                 <!-- Watch URL -->
@@ -398,11 +402,15 @@
                                     <TextBlock Grid.Column="1" Text="{Binding Video.WebpageUrl}" VerticalAlignment="Center"
                                                TextTrimming="CharacterEllipsis" />
                                     <Button Grid.Column="2" Style="{StaticResource Button.Icon}" Width="30" Height="30"
-                                            FontSize="13" Content="&#xE8C8;" ToolTip="Copy URL"
-                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.WebpageUrl}" />
+                                            ToolTip="Copy URL"
+                                            Command="{Binding CopyTextCommand}" CommandParameter="{Binding Video.WebpageUrl}">
+                                        <TextBlock Style="{StaticResource Glyph}" Text="&#xE8C8;" FontSize="13" />
+                                    </Button>
                                     <Button Grid.Column="3" Style="{StaticResource Button.Icon}" Width="30" Height="30"
-                                            FontSize="13" Content="&#xE774;" ToolTip="Open in browser"
-                                            Command="{Binding OpenUrlCommand}" CommandParameter="{Binding Video.WebpageUrl}" />
+                                            ToolTip="Open in browser"
+                                            Command="{Binding OpenUrlCommand}" CommandParameter="{Binding Video.WebpageUrl}">
+                                        <TextBlock Style="{StaticResource Glyph}" Text="&#xE774;" FontSize="13" />
+                                    </Button>
                                 </Grid>
                             </StackPanel>
                         </Border>

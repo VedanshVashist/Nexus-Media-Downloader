@@ -58,15 +58,25 @@
             <!-- Bulk actions -->
             <StackPanel Grid.Column="3" Orientation="Horizontal">
                 <Button Style="{StaticResource Button.Icon}" Command="{Binding PauseAllCommand}"
-                        ToolTip="Pause all" Content="&#xE769;" Margin="0,0,4,0" />
+                        ToolTip="Pause all" Margin="0,0,4,0">
+                    <TextBlock Style="{StaticResource Glyph}" Text="&#xE769;" />
+                </Button>
                 <Button Style="{StaticResource Button.Icon}" Command="{Binding ResumeAllCommand}"
-                        ToolTip="Resume all" Content="&#xE768;" Margin="0,0,4,0" />
+                        ToolTip="Resume all" Margin="0,0,4,0">
+                    <TextBlock Style="{StaticResource Glyph}" Text="&#xE768;" />
+                </Button>
                 <Button Style="{StaticResource Button.Icon}" Command="{Binding RetryFailedCommand}"
-                        ToolTip="Retry failed" Content="&#xE72C;" Margin="0,0,4,0" />
+                        ToolTip="Retry failed" Margin="0,0,4,0">
+                    <TextBlock Style="{StaticResource Glyph}" Text="&#xE72C;" />
+                </Button>
                 <Button Style="{StaticResource Button.Icon}" Command="{Binding CancelAllCommand}"
-                        ToolTip="Cancel all" Content="&#xE711;" Margin="0,0,4,0" />
+                        ToolTip="Cancel all" Margin="0,0,4,0">
+                    <TextBlock Style="{StaticResource Glyph}" Text="&#xE711;" />
+                </Button>
                 <Button Style="{StaticResource Button.Icon}" Command="{Binding ClearFinishedCommand}"
-                        ToolTip="Clear finished" Content="&#xE74D;" />
+                        ToolTip="Clear finished">
+                    <TextBlock Style="{StaticResource Glyph}" Text="&#xE74D;" />
+                </Button>
             </StackPanel>
         </Grid>
 
