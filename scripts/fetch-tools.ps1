@@ -89,7 +89,15 @@ Write-Host ""
 # --- Helpers -----------------------------------------------------------------------
 function Get-RemoteText {
     param([Parameter(Mandatory)][string]$Url)
-    return (Invoke-WebRequest -Uri $Url -UseBasicParsing -MaximumRedirection 5).Content
+    $content = (Invoke-WebRequest -Uri $Url -UseBasicParsing -MaximumRedirection 5).Content
+    # Windows PowerShell 5.1 returns the body as a Byte[] (not a string) when the
+    # response content type is non-text -- e.g. GitHub release assets, which are
+    # served as application/octet-stream. Decode to UTF-8 text so the checksum
+    # parsers always receive a string to split/scan.
+    if ($content -is [byte[]]) {
+        $content = [System.Text.Encoding]::UTF8.GetString($content)
+    }
+    return $content
 }
 
 function Save-RemoteFile {
