@@ -140,24 +140,24 @@
                     <TextBlock Style="{StaticResource Glyph}" Text="&#xE711;" FontSize="11" />
                 </Button>
             </Grid>
-            <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Level}" Value="Success">
-                    <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Success}" />
-                    <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Success}" />
-                    <Setter TargetName="icon" Property="Text" Value="&#xE930;" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Level}" Value="Warning">
-                    <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Warning}" />
-                    <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Warning}" />
-                    <Setter TargetName="icon" Property="Text" Value="&#xE7BA;" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Level}" Value="Error">
-                    <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Error}" />
-                    <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Error}" />
-                    <Setter TargetName="icon" Property="Text" Value="&#xE783;" />
-                </DataTrigger>
-            </DataTemplate.Triggers>
         </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Level}" Value="Success">
+                <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Success}" />
+                <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Success}" />
+                <Setter TargetName="icon" Property="Text" Value="&#xE930;" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Warning">
+                <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Warning}" />
+                <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Warning}" />
+                <Setter TargetName="icon" Property="Text" Value="&#xE7BA;" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Error">
+                <Setter TargetName="bar" Property="Background" Value="{DynamicResource Brush.Error}" />
+                <Setter TargetName="icon" Property="Foreground" Value="{DynamicResource Brush.Error}" />
+                <Setter TargetName="icon" Property="Text" Value="&#xE783;" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <!-- ============================================================
@@ -240,13 +240,13 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding IsFavorite}" Value="True">
-                    <Setter TargetName="favGlyph" Property="Text" Value="&#xE735;" />
-                    <Setter TargetName="favGlyph" Property="Foreground" Value="{DynamicResource Brush.Warning}" />
-                </DataTrigger>
-            </DataTemplate.Triggers>
         </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                <Setter TargetName="favGlyph" Property="Text" Value="&#xE735;" />
+                <Setter TargetName="favGlyph" Property="Foreground" Value="{DynamicResource Brush.Warning}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <!-- ============================================================

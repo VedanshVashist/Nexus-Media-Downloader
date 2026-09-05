@@ -219,7 +219,7 @@
             <Grid Grid.Row="2" Margin="32,20,32,24">
                 <!-- Step indicator -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Border Style="{StaticResource StepDot}">
+                    <Border>
                         <Border.Style>
                             <Style TargetType="Border" BasedOn="{StaticResource StepDot}">
                                 <Style.Triggers>
