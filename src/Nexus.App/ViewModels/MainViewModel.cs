@@ -165,7 +165,6 @@ public sealed partial class MainViewModel : ObservableObject, IDisposable
         _settings.SettingsChanged -= OnSettingsChanged;
         _manager.TaskStatusChanged -= OnTaskStatusChanged;
 
-        (_home as IDisposable)?.Dispose();
         foreach (var page in AllPages.OfType<IDisposable>())
         {
             page.Dispose();
